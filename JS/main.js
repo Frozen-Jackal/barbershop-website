@@ -39,6 +39,13 @@ const services = [
     }
 ];
 
+const navLinks = [
+    { label: "Home", href: "#hero"},
+    { label: "Services", href: "#features"},
+    { label: "Book", href: "#cta"},
+    { label: "Contact", href: "footer"}
+];
+
 
 // ----  Navigaion Data (Array off Objects) ----
 
@@ -81,6 +88,28 @@ const renderFeaturesMap = () => {
         .join("");
 
     featureGrid.innerHTML = cardsHTML;
+}
+
+//  ---- Render Navigsation using map() ----
+
+const renderNavigation = () => {
+    // Desktop Nav
+    if (nav) {
+        const navHTML = navLinks
+        .map((link) => {
+            return `
+            <a href="${link.herf}" class="nav-link">
+                ${link.label}
+            </a>
+        `;
+        })
+        .join(""); // join() is needed to convert the array of strings into one big string without commas in between
+        // we use empty string ("") as a seperator because we don't want anything in between the links (no commas, no spaces, dashes, etc.)
+        nav.innerHTML = navHTML
+    }
+
+    // Mobile Nav
+    if (mobileMenu) {}
 }
 
 //  ---- Helpers / Functions ----
@@ -179,3 +208,4 @@ if (callBtn) {
     });
 }
 renderFeaturesMap();
+renderNavigation();
