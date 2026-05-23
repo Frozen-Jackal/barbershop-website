@@ -25,19 +25,20 @@ const services = [
     {
         title: "Classic Haircut",
         text: "Timeless cuts with modern precision tailored to your style.",
-        image: "barbershop-website/assets/images/feature-1.jpg"
+        image: "assets/images/feature-1.jpg"
     },
     {
         title: "Beard Trim",
         text: "Shape and line-up your beard fora clean, sharp finish.",
-        image: "barbershop-website/assets/images/feature-2.jpg"
+        image: "assets/images/feature-2.jpg"
     },
     {
         title: "Straight Razor Shave",
         text: "Hot towel treatment with a smooth traditional shave.",
-        image: "barbershop-website/assets/images/feature-3.jpg"
+        image: "assets/images/feature-3.jpg"
     }
 ];
+
 
 // ----  Navigaion Data (Array off Objects) ----
 
@@ -45,25 +46,42 @@ const services = [
 
 //  ---- Render Features using forEach ----
 
-const renderFeatures = () => {
+// const renderFeatures = () => {
 
-    if (!featureGrid) return;
+//     if (!featureGrid) return;
 
-     services.forEach(service => { //calls the array name and use forEach to loop through it, services is the parameter that represents each item in the array as we loop through it
+//      services.forEach(service => { //calls the array name and use forEach to loop through it, services is the parameter that represents each item in the array as we loop through it
 
-        const card = document.createElement("article");
-        card.classList.add("feature-card");
+//         const card = document.createElement("article");
+//         card.classList.add("feature-card");
 
-        card.innerHTML = `
-            <img src"${service.image}" alt="${service.title}"
-            class="feature-img" />
+//         card.innerHTML = `
+//             <img src"${service.image}" alt="${service.title}"
+//             class="feature-img" />
+//             <h3 class="feature-title">${service.title}</h3>
+//             <p class="feature-text">${service.title}</p>
+//          `; //insert data into the card using template literals
+
+//         featureGrid.appendChild(card); //adds it to the page
+//     });
+// };
+
+
+const renderFeaturesMap = () => {
+    const cardsHTML = services
+        .map((service) => {
+            return `
+        <article class="feature-card">
+            <img src="${service.image}" alt="{service.title}" class="feature-img" />
             <h3 class="feature-title">${service.title}</h3>
-            <p class="feature-text">${service.title}</p>
-         `; //insert data into the card using template literals
+            <p class="feature-text">${service.text}</p>
+        </article>
+    `;
+        })
+        .join("");
 
-        featureGrid.appendChild(card); //adds it to the page
-    });
-};
+    featureGrid.innerHTML = cardsHTML;
+}
 
 //  ---- Helpers / Functions ----
 
@@ -160,4 +178,4 @@ if (callBtn) {
         }
     });
 }
-renderFeatures();
+renderFeaturesMap();
