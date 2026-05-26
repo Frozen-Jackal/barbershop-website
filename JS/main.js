@@ -16,7 +16,11 @@ const heading = document.getElementById("heroHeading");
 
 const featureGrid = document.getElementById("featureGrid");
 
-const nav = document.getElementById("nav")
+const nav = document.getElementById("nav");
+
+const siteHeader = document.querySelector(".site-header");
+
+// const cardContainer = document.querySelector("")
 
 
 //  ----- Services Data (Array of Objects) -----
@@ -39,17 +43,14 @@ const services = [
     }
 ];
 
+// ----  Navigation Data (Array off Objects) ----
+
 const navLinks = [
     { label: "Home", href: "#hero"},
     { label: "Services", href: "#features"},
     { label: "Book", href: "#cta"},
-    { label: "Contact", href: "footer"}
+    { label: "Contact", href: "#footer"}
 ];
-
-
-// ----  Navigaion Data (Array off Objects) ----
-
-
 
 //  ---- Render Features using forEach ----
 
@@ -93,12 +94,12 @@ const renderFeaturesMap = () => {
 //  ---- Render Navigsation using map() ----
 
 const renderNavigation = () => {
+
     // Desktop Nav
     if (nav) {
-        const navHTML = navLinks
-        .map((link) => {
+        const navHTML = navLinks.map((link) => {
             return `
-            <a href="${link.herf}" class="nav-link">
+            <a href="${link.href}" class="nav-link">
                 ${link.label}
             </a>
         `;
@@ -109,10 +110,30 @@ const renderNavigation = () => {
     }
 
     // Mobile Nav
-    if (mobileMenu) {}
-}
+    if (mobileMenu) {
+        const mobileHTML = navLinks.map(link => {
+            return `
+                <a href="${link.href}" class="mobile-link">
+                    ${link.label}
+                </a>
+            `;
+        }).join("");
+
+        mobileMenu.innerHTML = mobileHTML;
+    }
+};
 
 //  ---- Helpers / Functions ----
+
+const handleHeaderOnScroll = () => {
+    if (!siteHeader) return;
+
+    if (window.scrollY > 10) {
+        siteHeader.classList.add("is-scrolled");
+    } else {
+        siteHeader.classList.remove("is-scrolled");
+    }
+};
 
 // Update foooter year automatically
 
@@ -160,6 +181,8 @@ const updateHeadingText = (newText) => {
 };
 
 // ---- Event Listeners ----
+
+window.addEventListener("scroll", handleHeaderOnScroll);
 
 //  1) Set year on page load
 
@@ -209,3 +232,4 @@ if (callBtn) {
 }
 renderFeaturesMap();
 renderNavigation();
+handleHeaderOnScroll();
