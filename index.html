@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vintage Barbershop</title>
     
+    <!-- CSS -->
     <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="CSS/calendar.css"> <!-- newly added -->
 </head>
 <body>
 
@@ -106,6 +108,65 @@
                 <button class="btn btn-secondary" id="callBtn">Call Us</button>
             </div>
         </div>
+
+        <div class="container booking-layout">
+            <div class="calendar-card">
+                <div class="calendar-header">
+                    <button class="calendar-nav-btn" id="prevMonthBtn">←</button>
+                    <h3 id="calendarMonthLabel">Month Year</h3>
+                    <button class="calendar-nav-btn" id="nextMonthBtn">→</button>
+                </div>
+
+                <div class="calendar-weekdays">
+                    <span>Sun</span>
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                </div>
+
+                <div class="calendar-nav-btn" id="calendarGrid"></div>
+            </div>
+
+            <div class="booking-panel">
+                <h3 class="booking-panel-title">Book Your Appointment</h3>
+
+                <p class="selected-date-text">Selected Date:
+                    <span id="selectedDateText">Choose a date</span>
+                </p>
+
+                <div class="time-slots" id="timeSlots"></div>
+
+                <form class="booking-form" id="bookingForm">
+                    <div class="form-group">
+                        <label for="customerName">Name</label>
+                        <input type="text"
+                        id="customerName"
+                        placeholder="Enter your name"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerService">Service</label>
+                        <select id="customerService">
+                            <option value="">Choose a service</option>
+                            <option value="Classic Haircut">Classic Haircut</option>
+                            <option value="Beard Trim">Bread Trim</option>
+                            <option value="Straight Razor Shave">Straight Razor Shave</option>
+                            <option value="Fade & Style">Fade & Style</option>
+                        </select>
+                    </div>
+
+                    <input type="hidden" id="selectedTimeInput" />
+
+                    <button type="submit" class="btn btn-primary booking-submit-btn">Confirm Booking</button>
+
+                    <p class="booking-message" id="bookingMessage"></p>
+                </form>
+            </div>
+        </div>
     </section>
 
     <!-- ====Footer Section ===== -->
@@ -160,8 +221,30 @@
         </div>
     </footer>
 
+    <!-- ==== Service Details Modal ==== -->
+
+ <div class="service-modal" id="serviceModal" aria-hidden="tru">
+    <div class="service-modal-overlay" id="serviceModalOverlay"></div>
+
+    <div class="service-modal-content"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="serviceModalTitle">
+        <button class="service-modal-close"
+        id="serviceModalClose"
+        aria-label="Close modal">
+        x
+    </button>
+
+    <h3 id="serviceModalTitle">Service Details</h3>
+    <p class="serviceModalPrice" id="serviceModalPrice"></p>
+    <ul class="service-modal-list" id="serviceModalList"></ul>
+    </div>
+ </div>
+
     <!-- JS -->
 
     <script src="JS/main.js"></script>
+    <script src="JS/calendar.js"></script>
 </body>
 </html>
